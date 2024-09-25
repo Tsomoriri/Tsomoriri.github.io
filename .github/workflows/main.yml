@@ -40,7 +40,20 @@ jobs:
         echo "VITE_GITHUB_ACCESS_TOKEN_PART1=${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART1 }}" >> .env.local
         echo "VITE_GITHUB_ACCESS_TOKEN_PART2=${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART2 }}" >> .env.local
 
-    
+    - name: Test GitHub API Authentication
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN_PART1 }}${{ secrets.GITHUB_ACCESS_TOKEN_PART2 }}
+      run: |
+        response=$(curl -s -i -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user)
+        status_code=$(echo "$response" | head -n 1 | cut -d$' ' -f2)
+        echo "Status code: $status_code"
+        if [ $status_code -eq 200 ]; then
+          echo "GitHub API authentication successful"
+        else
+          echo "GitHub API authentication failed"
+          echo "Response headers:"
+          echo "$response" | sed -n '1,/^\r$/p'
+        fi
 
     - name: Build
       run: yarn build
