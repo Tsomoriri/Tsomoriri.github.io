@@ -42,7 +42,7 @@ jobs:
 
     - name: Test GitHub API Authentication
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN_PART1 }}${{ secrets.GITHUB_ACCESS_TOKEN_PART2 }}
+        GITHUB_TOKEN: ${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART1 }}${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART2 }}
       run: |
         response=$(curl -s -i -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user)
         status_code=$(echo "$response" | head -n 1 | cut -d$' ' -f2)
