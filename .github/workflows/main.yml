@@ -31,20 +31,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Create env file
-        run: |
-          echo "VITE_APP_TITLE=${{ secrets.VITE_APP_TITLE }}" >> .env
-          echo "VITE_TITLE=${{ secrets.VITE_TITLE }}" >> .env
-          echo "VITE_EMAIL=${{ secrets.VITE_EMAIL }}" >> .env
-          echo "VITE_GITHUB_URL=${{ secrets.VITE_GITHUB_URL }}" >> .env
-          echo "VITE_GITHUB_OWNER=${{ secrets.VITE_GITHUB_OWNER }}" >> .env
-          echo "VITE_GITHUB_REPO=${{ secrets.VITE_GITHUB_REPO }}" >> .env
-
       - name: Build
-        run: npm run build
+        run: |
+          npm install
+          npm run-script build
+        env:
+          VITE_GITHUB_ACCESS_TOKEN_PART1: ${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART1 }}
+          VITE_GITHUB_ACCESS_TOKEN_PART2: ${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART2 }}
+          VITE_GITHUB_OWNER: ${{ secrets.VITE_GITHUB_OWNER }}
+          VITE_GITHUB_REPO: ${{ secrets.VITE_GITHUB_REPO }}
+          
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -52,3 +48,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+
+
+        
