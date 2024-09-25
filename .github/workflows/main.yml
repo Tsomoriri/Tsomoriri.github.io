@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Updated to a more recent LTS version
+          node-version: '20'
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -32,7 +32,10 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Install Terser
+        run: npm install terser --save-dev
 
       - name: Create env file
         run: |

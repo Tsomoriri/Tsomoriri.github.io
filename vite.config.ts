@@ -4,9 +4,8 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',  // Add this line for GitHub Pages deployment
+  base: '/',
   define: {
-    // https://github.com/codesandbox/sandpack/pull/787#issuecomment-1450353368
     'process.env.SANDPACK_BARE_COMPONENTS': 'false',
   },
   optimizeDeps: {
@@ -15,9 +14,15 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist',  // Ensure this matches your GitHub Actions publish_dir
+    outDir: 'dist',
     minify: 'terser',
     sourcemap: false,
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
   },
   plugins: [
     react({
