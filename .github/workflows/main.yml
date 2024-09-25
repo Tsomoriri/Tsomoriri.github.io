@@ -37,7 +37,7 @@ jobs:
         echo "VITE_GITHUB_URL=${{ secrets.VITE_GITHUB_URL }}" >> .env.local
         echo "VITE_GITHUB_OWNER=${{ secrets.VITE_GITHUB_OWNER }}" >> .env.local
         echo "VITE_GITHUB_REPO=${{ secrets.VITE_GITHUB_REPO }}" >> .env.local
-        echo "VITE_GITHUB_ACCESS_TOKEN=${{ secrets.GITHUB_TOKEN}}" >> .env.local
+        echo "VITE_GITHUB_ACCESS_TOKEN=${{ secrets.VITE_GITHUB_ACCESS_TOKEN}}" >> .env.local
        
 
     - name: Test GitHub API Authentication
