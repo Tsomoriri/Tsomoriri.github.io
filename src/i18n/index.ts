@@ -7,7 +7,7 @@ import en from './locales/en';
 export const defaultNS = 'translation';
 export const resources = { cn, en };
 
-const preferredLanguage = navigator.language === 'zh-CN' ? 'cn' : 'en';
+const preferredLanguage = navigator.language === 'en';
 const storedLanguage = localStorage.getItem('language');
 
 i18n.use(initReactI18next).init({

@@ -131,9 +131,9 @@ export default function Main() {
         <Footer>
           <FooterCenter>
             <a tw="hover:text-blue-500" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-              CC BY-NC-SA 4.0
+              CC  4.0
             </a>
-            <span tw="ml-2">2016-present © varHarrie</span>
+            <span tw="ml-2">2024-present © sushen</span>
           </FooterCenter>
         </Footer>
       </Wrapper>
