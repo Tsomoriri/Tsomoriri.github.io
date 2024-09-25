@@ -82,7 +82,7 @@ jobs:
 
     - name: Check GitHub Token
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN_PART1 }}${{ secrets.GITHUB_ACCESS_TOKEN_PART2 }}
+        GITHUB_TOKEN: ${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART1 }}${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART2 }}
       run: |
         echo "Token length: ${#GITHUB_TOKEN}"
         echo "First 4 characters: ${GITHUB_TOKEN:0:4}"
@@ -90,7 +90,7 @@ jobs:
 
     - name: Test GitHub API Authentication
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN_PART1 }}${{ secrets.GITHUB_ACCESS_TOKEN_PART2 }}
+        GITHUB_TOKEN: ${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART1 }}${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART2 }}
       run: |
         response=$(curl -s -i -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user)
         status_code=$(echo "$response" | head -n 1 | cut -d$' ' -f2)
@@ -105,8 +105,8 @@ jobs:
 
     - name: Check Individual Token Parts
       env:
-        TOKEN_PART1: ${{ secrets.GITHUB_ACCESS_TOKEN_PART1 }}
-        TOKEN_PART2: ${{ secrets.GITHUB_ACCESS_TOKEN_PART2 }}
+        TOKEN_PART1: ${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART1 }}
+        TOKEN_PART2: ${{ secrets.VITE_GITHUB_ACCESS_TOKEN_PART2 }}
       run: |
         echo "Token part 1 length: ${#TOKEN_PART1}"
         echo "Token part 2 length: ${#TOKEN_PART2}"
