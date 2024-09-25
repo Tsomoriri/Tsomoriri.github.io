@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]  # Set this to your default branch
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      VITE_APP_TITLE: Blog
+      VITE_TITLE: Sushen
+      VITE_EMAIL: sushenydv@gmail.com
+      VITE_GITHUB_URL: https://github.com/Tsomoriri
+      VITE_GITHUB_OWNER: Tsomoriri
+      VITE_GITHUB_REPO: Tsomoriri.github.io
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'  # Adjust this to your project's Node.js version
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Create env file
+      run: |
+        echo "VITE_APP_TITLE=${{ secrets.VITE_APP_TITLE }}" >> .env.local
+        echo "VITE_TITLE=${{ secrets.VITE_TITLE }}" >> .env.local
+        echo "VITE_EMAIL=${{ secrets.VITE_EMAIL }}" >> .env.local
+        echo "VITE_GITHUB_URL=${{ secrets.VITE_GITHUB_URL }}" >> .env.local
+        echo "VITE_GITHUB_OWNER=${{ secrets.VITE_GITHUB_OWNER }}" >> .env.local
+        echo "VITE_GITHUB_REPO=${{ secrets.VITE_GITHUB_REPO }}" >> .env.local
+        echo "VITE_GITHUB_ACCESS_TOKEN=${{ secrets.GITHUB_ACCESS_TOKEN }}" >> .env.local
+
+    - name: Build
+      run: yarn build
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist  # Adjusted this to the typical Vite build output directory
+        publish_branch: gh-p
