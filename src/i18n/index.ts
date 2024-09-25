@@ -10,10 +10,5 @@ export const resources = { cn, en };
 const preferredLanguage = navigator.language === 'en';
 const storedLanguage = localStorage.getItem('language');
 
-i18n.use(initReactI18next).init({
-  resources,
-  defaultNS,
-  lng: storedLanguage || preferredLanguage,
-});
 
 export default i18n;
