@@ -233,8 +233,14 @@ class Github {
 //   true // Use authentication
 // );
 
-export default new Github(
+export const unauthenticatedGithub = new Github(
   import.meta.env.VITE_GITHUB_OWNER,
   import.meta.env.VITE_GITHUB_REPO,
-  false // Don't use authentication
+  false
+);
+
+export const authenticatedGithub = new Github(
+  import.meta.env.VITE_GITHUB_OWNER,
+  import.meta.env.VITE_GITHUB_REPO,
+  true
 );

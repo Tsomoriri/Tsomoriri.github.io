@@ -11,7 +11,7 @@ import useHandling from '../hooks/use-handling';
 import useQuery from '../hooks/use-query';
 import ArticleModel from '../models/ArticleModel';
 import CategoryModel from '../models/CategoryModel';
-import github from '../services/github';
+import {unauthenticatedGithub as github} from '../services/github';
 import { createQueryURL } from '../utils';
 
 const Wrapper = tw.main`mx-auto w-full max-w-screen-lg px-8 py-12`;

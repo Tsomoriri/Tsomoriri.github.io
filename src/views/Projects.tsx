@@ -6,7 +6,8 @@ import ProjectItem from '../components/ProjectItem';
 import ProjectSkeleton from '../components/ProjectSkeleton';
 import useHandling from '../hooks/use-handling';
 import ProjectModel from '../models/ProjectModel';
-import github, { Direction, RepositorySort, RepositoryType } from '../services/github';
+import  { unauthenticatedGithub as github
+, Direction, RepositorySort, RepositoryType } from '../services/github';
 
 const Wrapper = tw.main`mx-auto w-full max-w-screen-lg px-8 py-12`;
 
