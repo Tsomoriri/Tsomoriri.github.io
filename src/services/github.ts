@@ -148,9 +148,7 @@ class Github {
   private token?: string;
 
   constructor(private owner: string, private repo: string, useAuth: boolean = true) {
-    if (useAuth) {
-      this.token = `${import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART1}${import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART2}`;
-    }
+   
   }
 
   private async request(method: string, url: string, data?: Record<string, unknown>) {
@@ -167,9 +165,7 @@ class Github {
       Accept: 'application/vnd.github.v3+json',
     };
 
-    if (this.token) {
-      headers['Authorization'] = `token ${this.token}`;
-    }
+   
 
     const response = await fetch(`${this.apiBase}${url}${query}`, {
       method,
