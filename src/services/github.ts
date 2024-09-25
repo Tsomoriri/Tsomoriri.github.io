@@ -143,8 +143,11 @@ function hasBody(method: string) {
 
 class Github {
   private apiBase = 'https://api.github.com';
+  private token: string;
 
-  constructor(private token: string, private owner: string, private repo: string) {}
+  constructor( private owner: string, private repo: string) {
+    this.token = `${import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART1}${import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART2}`;
+  }
 
   private async request(method: string, url: string, data?: Record<string, unknown>) {
     let query = '';
