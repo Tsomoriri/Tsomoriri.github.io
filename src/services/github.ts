@@ -141,12 +141,16 @@ function hasBody(method: string) {
   return ['POST', 'PUT', 'PATCH'].includes(method);
 }
 
+
+
 class Github {
   private apiBase = 'https://api.github.com';
-  private token: string;
+  private token?: string;
 
-  constructor( private owner: string, private repo: string) {
-    this.token = `${import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART1}${import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART2}`;
+  constructor(private owner: string, private repo: string, useAuth: boolean = true) {
+    if (useAuth) {
+      this.token = `${import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART1}${import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART2}`;
+    }
   }
 
   private async request(method: string, url: string, data?: Record<string, unknown>) {
@@ -158,15 +162,24 @@ class Github {
       body = undefined;
     }
 
-    const response = await fetch([this.apiBase, url, query].join(''), {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      Accept: 'application/vnd.github.v3+json',
+    };
+
+    if (this.token) {
+      headers['Authorization'] = `token ${this.token}`;
+    }
+
+    const response = await fetch(`${this.apiBase}${url}${query}`, {
       method,
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        Accept: 'application/vnd.github.v3+json',
-        Authorization: `token ${this.token}`,
-      },
+      headers,
       body: body ? JSON.stringify(body) : undefined,
     });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
     return response.json();
   }
@@ -213,8 +226,15 @@ class Github {
   }
 }
 
+// // Example usage:
+// const authenticatedGithub = new Github(
+//   import.meta.env.VITE_GITHUB_OWNER,
+//   import.meta.env.VITE_GITHUB_REPO,
+//   true // Use authentication
+// );
+
 export default new Github(
-  // import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART1 + import.meta.env.VITE_GITHUB_ACCESS_TOKEN_PART2,
   import.meta.env.VITE_GITHUB_OWNER,
-  import.meta.env.VITE_GITHUB_REPO
+  import.meta.env.VITE_GITHUB_REPO,
+  false // Don't use authentication
 );
