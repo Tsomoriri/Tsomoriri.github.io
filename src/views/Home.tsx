@@ -37,8 +37,8 @@ export default function Home() {
         <ShapeEffect count={12} sizes={[40, 80]} />
       </Foreground>
       <Center>
-        <Title>{t('intro.title')}</Title>
-        <Description>{t('intro.description')}</Description>
+        <Title>{"Hi, I'm Sushen"}</Title>
+        <Description>{"A SDE with focuses on MLOPS and full stack development "}</Description>
         <Link to="/posts">
           <LinkButton>
             <span>{t('intro.link')}</span>
