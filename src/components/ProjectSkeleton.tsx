@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 import Skeleton from './Skeleton';
 
 const Wrapper = tw.div`
-  relative p-3 pl-14
+  relative p-3 pl-14 pb-10
   bg-white dark:bg-gray-900 rounded-md ring-1 ring-slate-600/5 shadow-sm hover:shadow-lg
   transition-all duration-300 flex flex-col
 `;
