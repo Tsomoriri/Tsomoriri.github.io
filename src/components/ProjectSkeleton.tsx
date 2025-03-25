@@ -13,7 +13,7 @@ const Icon = tw(Skeleton)`absolute top-3 left-3 w-9 h-9 rounded-md`;
 
 const Title = tw(Skeleton)`w-1/2 h-5 text-blue-200`;
 
-const Description = tw(Skeleton)`mt-2 w-2/3`;
+const Description = tw(Skeleton)`mt-2 w-2/3 mb-2`;
 
 const CountList = tw.div`mt-2 flex`;
 
