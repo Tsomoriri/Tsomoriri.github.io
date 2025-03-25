@@ -1,34 +1,95 @@
 import React from 'react';
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
+import IconIssue from '~icons/octicon/issue-opened-16';
+import IconForked from '~icons/octicon/repo-forked-16';
+import IconStar from '~icons/octicon/star-16';
+import IconDefault from '~icons/ri/code-s-slash-line';
+import IconCss from '~icons/ri/css3-line';
+import IconHtml from '~icons/ri/html5-line';
+import IconVue from '~icons/ri/vuejs-line';
+import IconJs from '~icons/teenyicons/javascript-outline';
+import IconTs from '~icons/teenyicons/typescript-outline';
+import IconCS from '~icons/vscode-icons/file-type-csharp';
 
-import Skeleton from './Skeleton';
+import ProjectModel from '../models/ProjectModel';
 
 const Wrapper = tw.div`
-  relative p-3 pl-14 
+  relative p-3 pl-14
   bg-white dark:bg-gray-900 rounded-md ring-1 ring-slate-600/5 shadow-sm hover:shadow-lg
-  transition-all duration-300 flex flex-col
+  transition-all duration-300
+  flex flex-col // Add flex direction column
 `;
 
-const Icon = tw(Skeleton)`mt-auto absolute top-3 left-3 w-9 h-9 rounded-md`;
+const Icon = styled.div`
+  ${tw`
+    absolute top-3 left-3 w-9 h-9 rounded-md
+    flex items-center justify-center overflow-hidden font-bold
+  `}
 
-const Title = tw(Skeleton)`w-1/2 h-5 text-blue-200`;
+  &::before {
+    ${tw`absolute top-0 left-0 block [content:''] w-full h-full opacity-20`}
+    background-color: currentColor;
+  }
+`;
 
-const Description = tw(Skeleton)`mt-2 w-2/3 mb-auto`;
+const Title = tw.a`block text-blue-500 truncate`;
 
-const CountList = tw.div`mt-auto flex`;
+const Description = styled.div`
+  ${tw`mt-2 text-slate-400 text-sm`}
 
-const CountItem = tw(Skeleton)`mt-auto mr-4 w-10 h-5`;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
 
-export default function ProjectSkeleton() {
+const CountList = tw.ul`mt-auto space-x-3 flex min-w-0 text-sm text-slate-400 leading-5`; // Use mt-auto
+
+const CountItem = tw.li`flex items-center`;
+
+type IconDetail = {
+  component: React.FunctionComponent;
+  color: string;
+};
+
+const iconMap: Record<string, IconDetail> = {
+  default: { component: IconDefault, color: '' },
+  TypeScript: { component: IconTs, color: '#3178C6' },
+  JavaScript: { component: IconJs, color: '#FCD002' },
+  HTML: { component: IconHtml, color: '#FF3C41' },
+  CSS: { component: IconCss, color: '#10BDFF' },
+  Vue: { component: IconVue, color: '#41B883' },
+  'C#': { component: IconCS, color: '#368833' },
+};
+
+export type ProjectItemProps = {
+  project: ProjectModel;
+};
+
+export default function ProjectItem(props: ProjectItemProps) {
+  const { project } = props;
+
+  const icon = iconMap[props.project.language] ?? iconMap.default;
+
   return (
     <Wrapper>
-      <Icon />
-      <Title />
-      <Description />
+      <Icon style={{ color: icon.color }}>
+        <icon.component />
+      </Icon>
+      <Title href={project.htmlUrl}>{project.fullName}</Title>
+      <Description>{project.description}</Description>
       <CountList>
-        {Array.from({ length: 3 }).map((_, i) => (
-          <CountItem key={i} />
-        ))}
+        <CountItem>
+          <IconStar />
+          <span tw="ml-2">{project.stargazersCount}</span>
+        </CountItem>
+        <CountItem>
+          <IconForked />
+          <span tw="ml-2">{project.forksCount}</span>
+        </CountItem>
+        <CountItem>
+          <IconIssue />
+          <span tw="ml-2">{project.openIssuesCount}</span>
+        </CountItem>
       </CountList>
     </Wrapper>
   );
