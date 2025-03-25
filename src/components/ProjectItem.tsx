@@ -34,7 +34,7 @@ const Icon = styled.div`
 const Title = tw.a`block text-blue-500 truncate`;
 
 const Description = styled.div`
-  ${tw`mt-2 text-slate-400 text-sm overflow-hidden`}
+  ${tw`mt-2 text-slate-400 text-sm`}
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
