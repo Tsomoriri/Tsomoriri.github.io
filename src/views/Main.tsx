@@ -7,6 +7,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import tw, { css, styled } from 'twin.macro';
+import IconCV from '~icons/ri/profile-line';
 import IconPosts from '~icons/ri/article-line';
 import IconProjects from '~icons/ri/function-line';
 import IconGithub from '~icons/ri/github-line';
@@ -107,7 +108,10 @@ export default function Main() {
                 <IconProjects tw="inline lg:hidden" />
                 <span tw="hidden lg:inline">{t('tab.projects')}</span>
               </NavLinkItem>
-
+              <NavLinkItem to="/cv">
+                 <IconCV tw="inline lg:hidden" />
+                 <span tw="hidden lg:inline">{t('tab.cv')}</span>
+               </NavLinkItem>
               <Divider />
 
               <NavItem href={`mailto:${email}`}>

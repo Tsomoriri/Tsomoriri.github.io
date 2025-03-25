@@ -3,6 +3,7 @@ import { HashRouter, Outlet, Route, Routes } from 'react-router-dom';
 
 import Article from './views/Article';
 import Articles from './views/Articles';
+import CV from './views/CV';
 import Home from './views/Home';
 import Main from './views/Main';
 import Projects from './views/Projects';
@@ -10,6 +11,7 @@ import Projects from './views/Projects';
 const milestones = {
   posts: Number(import.meta.env.VITE_GITHUB_MILESTONE_POSTS),
   snippets: Number(import.meta.env.VITE_GITHUB_MILESTONE_SNIPPETS),
+  cv: Number(import.meta.env.VITE_GITHUB_MILESTONE_CV),
 };
 
 export default function App() {
@@ -27,6 +29,7 @@ export default function App() {
             <Route path=":id" element={<Article />} />
           </Route>
           <Route path="projects" element={<Projects />} />
+          <Route path="cv" element={<CV milestone={milestones.cv} />} /> {/* Add this route */}
         </Route>
       </Routes>
     </HashRouter>
