@@ -6,7 +6,7 @@ import Skeleton from './Skeleton';
 const Wrapper = tw.div`
   relative p-3 pl-14
   bg-white dark:bg-gray-900 rounded-md ring-1 ring-slate-600/5 shadow-sm hover:shadow-lg
-  transition-all duration-300
+  transition-all duration-300 flex flex-col
 `;
 
 const Icon = tw(Skeleton)`absolute top-3 left-3 w-9 h-9 rounded-md`;
