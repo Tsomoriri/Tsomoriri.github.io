@@ -17,6 +17,7 @@ const Wrapper = tw.div`
   relative p-3 pl-14
   bg-white dark:bg-gray-900 rounded-md ring-1 ring-slate-600/5 shadow-sm hover:shadow-lg
   transition-all duration-300
+  h-[140px]
 `;
 
 const Icon = styled.div`
@@ -41,7 +42,7 @@ const Description = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-const CountList = tw.ul`mt-2 space-x-3 flex min-w-0 text-sm text-slate-400 leading-5`;
+const CountList = tw.ul`absolute bottom-1 space-x-3 flex min-w-0 text-sm text-slate-400 leading-5`;
 
 const CountItem = tw.li`flex items-center`;
 
