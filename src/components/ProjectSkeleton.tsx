@@ -17,7 +17,7 @@ const Wrapper = tw.div`
   relative p-3 pl-14
   bg-white dark:bg-gray-900 rounded-md ring-1 ring-slate-600/5 shadow-sm hover:shadow-lg
   transition-all duration-300
-  flex flex-col // Add flex direction column
+  flex flex-col // Keep flex direction column
 `;
 
 const Icon = styled.div`
@@ -35,14 +35,14 @@ const Icon = styled.div`
 const Title = tw.a`block text-blue-500 truncate`;
 
 const Description = styled.div`
-  ${tw`mt-2 text-slate-400 text-sm`}
+  ${tw`mt-2 text-slate-400 text-sm mb-8`} // Increased margin-bottom
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
 
-const CountList = tw.ul`mt-auto space-x-3 flex min-w-0 text-sm text-slate-400 leading-5`; // Use mt-auto
+const CountList = tw.ul`space-x-3 flex min-w-0 text-sm text-slate-400 leading-5`; // Removed mt-auto
 
 const CountItem = tw.li`flex items-center`;
 
